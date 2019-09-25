@@ -1,0 +1,71 @@
+<div class="container">
+    <hr />
+    <h3>User: {{userName}} <span class="pull-right"><button type="button" class="btn btn-primary" (click)="onLogout()">Logout</button></span></h3>
+</div>
+<div class="container">
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" required autofocus [(ngModel)]="firstName" />
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" required [(ngModel)]="lastName" />
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter Email" [(ngModel)]="email" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter Password" [(ngModel)]="password" />
+    </div>
+    <!-- Property Binding: [ ] -->
+    <button type="button" class="btn btn-info" [disabled]="addNewUser" (click)="onAddNewUser()">Add User</button>
+    <!-- Event Binding: ( ) -->
+    &nbsp;<button type="button" class="btn btn-secondary" (click)="onReset()">Clear</button>
+</div>
+<div *ngIf="loginError">
+    <br />
+    <div class="alert alert-danger">
+        <strong>Error!</strong> Registration unsuccessful.
+    </div>
+</div>
+
+<!-- Built-in structural (changes structure of DOM) *ngIf Directive: conditional expression returns true/false -->
+<div class="container" id="usersDiv">
+    <hr />
+    <!-- Built-in ngStyle attribute directive: uses Property Binding [ ] to bind to a property of the directive -->
+    <h3 [ngStyle]="{color: getColor()}">Users</h3>
+    <!-- 
+    <div *ngIf="newUserAdded; else noUsers">
+        <p *ngFor="let user of users">{{user}}</p>
+    </div> -->
+
+    <div *ngIf="newUserAdded; else noUsers">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user.USERNAME}}</td>
+                    <td>{{user.EMAIL}}</td>
+                    <td><button id="{{user.USERID}}Edit" class="btn-info">Edit</button><button id="{{user.USERID}}delete" class="btn-danger">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--
+      String Interpolation: Whatever is evaluated in the TypeScript expression inside the String Interpolation braces {{ }} resolves to a String.
+      {{ TypeScript_Expression }} => result is a String
+    -->
+    <!-- {{users}}
+    </div> -->
+    <!-- Create ng-template with local reference (#) to conditinally display -->
+    <ng-template #noUsers>No Users Added.</ng-template>
+</div>

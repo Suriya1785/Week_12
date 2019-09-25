@@ -1,0 +1,64 @@
+<div class="container">
+    <h1>{{title}}</h1>
+
+    <div class="container">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" required autofocus [(ngModel)]="firstName" />
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" required [(ngModel)]="lastName" />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter Email" [(ngModel)]="email" />
+        </div>
+        <!-- Property Binding: [ ] -->
+        <button type="button" class="btn btn-primary" [disabled]="addNewUser" (click)="onAddNewUser()">Add User</button>
+        <!-- Event Binding: ( ) -->
+        &nbsp;<button type="button" class="btn btn-secondary" (click)="onReset()">Clear</button>
+    </div>
+</div>
+<!-- <div class="container" id="usersDiv" *ngIf="newUserAdded; else noUsers">
+    <hr />
+    <h3>Users</h3> -->
+
+<!--
+      String Interpolation: Whatever is evaluated in the TypeScript expression inside the String Interpolation braces {{ }} resolves to a String.
+      {{ TypeScript_Expression }}  => result is a String
+    -->
+<!-- {{firstName}} &nbsp; {{lastName}} &nbsp; {{email}} -->
+<!-- {{newUser}}
+
+</div> -->
+
+<!-- Built-in structural (changes structure of DOM) *ngIf Directive: conditional expression returns true/false -->
+<div class="container" id="usersDiv">
+    <hr />
+    <!-- Built-in ngStyle attribute directive: uses Property Binding [ ] to bind to a property of the directive -->
+    <h3 [ngStyle]="{color: getColor()}">Users</h3>
+    <div *ngIf="newUserAdded; else noUsers">
+        <!--
+        String Interpolation: Whatever is evaluated in the TypeScript expression inside the String Interpolation braces {{ }} resolves to a String.
+        {{ TypeScript_Expression }} => result is a String
+      -->
+        {{newUser}}
+    </div>
+    <!-- Create ng-template with local reference (#) to conditinally display -->
+    <ng-template #noUsers>No Users Added.</ng-template>
+</div>
+
+<!-- Create ng-template with local reference #  to conditinally display
+<ng-template #noUsers>
+    <div class="container">
+        <hr />
+        <h3>No Users Added.</h3>
+    </div>
+</ng-template> -->
+
+<div class="container">
+    <hr />
+    <!-- Even though currentYear is defined as type number in app.component.ts, it resolves to a string -->
+    <footer class="pull-right">&copy; {{getCurrentYear()}}</footer>
+</div>
