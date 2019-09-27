@@ -31,6 +31,13 @@
     </div>
 </div>
 
+<div *ngIf="loadError">
+    <br />
+    <div class="alert alert-danger">
+        <strong>Error!</strong> Loading Existing User unsuccessful.
+    </div>
+</div>
+
 <!-- Built-in structural (changes structure of DOM) *ngIf Directive: conditional expression returns true/false -->
 <div class="container" id="usersDiv">
     <hr />
@@ -54,7 +61,9 @@
                 <tr *ngFor="let user of users">
                     <td>{{user.USERNAME}}</td>
                     <td>{{user.EMAIL}}</td>
-                    <td><button id="{{user.USERID}}Edit" class="btn-info">Edit</button><button id="{{user.USERID}}delete" class="btn-danger">Delete</button></td>
+                    <!-- <td><button id="{{user.USERID}}edit" (click)="onEditUser({{user.USERID}})" class="btn-info">Edit</button><button id="{{user.USERID}}delete" (click)="onDeleteUser({{user.USERID}})" class="btn-danger">Delete</button></td> -->
+                    <!-- <td><button id="{{user.USERID}}edit" (click)="onEditUser($e)" class="btn-info">Edit</button><button id="{{user.USERID}}delete" (click)="onDeleteUser()" class="btn-danger">Delete</button></td> -->
+                    <td><button id="{{user.USERID}}edit" (click)="onEditUser(user.USERID)" class="btn-info">Edit</button><button id="{{user.USERID}}delete" (click)="onDeleteUser(user.USERID)" class="btn-danger">Delete</button></td>
                 </tr>
             </tbody>
         </table>

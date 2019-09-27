@@ -13,7 +13,9 @@ export class UserService {
 
   private registerEndpoint: string = 'http://localhost:3000/users/register/';
   private getUsersEndpoint: string = 'http://localhost:3000/admin/listAllUsers/';
-  private getNonAdminEndpoint: string = 'http://localhost:3000/admin/listNoAdminUsers';
+  private getNonAdminEndpoint: string = 'http://localhost:3000/admin/listNoAdminUsers/';
+  private updateUserEndpoint: string = 'http://localhost:3000/users/';
+  private getUserEndpoint: string = 'http://localhost:3000/users/byId/';
 	private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
@@ -37,12 +39,22 @@ export class UserService {
 
   getUsers(): Observable<any>{
     return this.http.get(this.getUsersEndpoint, this.httpOptions)
-    .pipe(map(res => <any[]>res))
+    .pipe(map(res => <any[]>res));
+  }
+
+  getUser(userId:number): Observable<any>{
+    return this.http.get(`${this.getUserEndpoint}${userId}`, this.httpOptions)
+    .pipe(map(res => <any[]>res));
   }
 
   getNonAdminUsers(): Observable<any>{
     return this.http.get(this.getNonAdminEndpoint, this.httpOptions)
-    .pipe(map(res => <any[]>res))
+    .pipe(map(res => <any[]>res));
+  }
+
+  updateUser(email:string, userId:number): Observable<any>{
+    return this.http.put(this.updateUserEndpoint, {email : email, id:userId}, this.httpOptions)
+    .pipe(map(res => <any[]> res));
   }
 
 }

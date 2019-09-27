@@ -32,9 +32,12 @@ export class LoginComponent implements OnInit {
         data => 
         {
           if (data !== null) {
+          this.authService.setAdminAuthStatus(true);
+          this.authService.setUserAuthStatus(true);
           this.loginError = false;
           // // load users "page"
-          this.router.navigate(['users'], {queryParams: {username: data.USERNAME}});
+          // this.router.navigate(['users'], {queryParams: {username: data.USERNAME, userId:data.USERID}});
+          this.router.navigate(['updateuser'], {queryParams: {username: data.USERNAME, userId:data.USERID}});
         }
       },
       err => 

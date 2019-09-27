@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './user.module';
 import { UserService } from './../providers/user.service';
+
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../providers/auth.service';
+// import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-user',
@@ -35,9 +38,44 @@ export class UserComponent implements OnInit {
     // create instance of UserService
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
-    ) { }
+    ) { };
+
+    onEditUser(userId: number): void{
+      console.log('edit user +');
+      console.log(event.target);
+
+      if (this.authService.getAdminAuthStatus()){
+        this.userService.getUser(userId).subscribe(
+          data => {
+              console.log('success');
+              this.firstName = data.USERNAME;
+              this.email = data.EMAIL;
+          },
+          err => {
+              console.log('failure');
+          }
+      )
+      } else {
+        console.log("No authentication to edit user");
+      }
+
+     
+      // this.userService.updateUser(this.email, this.userId).subscribe(
+      //   data => {
+
+      //   },
+      //   err => {
+
+      //   }
+      // )
+    }
+
+    onDeleteUser(x): void{
+      console.log('delete user');
+    }
 
   onAddNewUser(): void{
     this.registerError = false;
@@ -111,7 +149,13 @@ export class UserComponent implements OnInit {
     onLogout() {
       this.router.navigate(['/']);
     }
-  
+
+/*
+* function is to load users during admin update page 
+* Params: None
+* Calls: None
+* Called by: login component
+*/
   ngOnInit() {
         // get username from Query Params
       // Subscribe to Observable

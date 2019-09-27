@@ -8,6 +8,7 @@ import { Routes, RouterModule }  from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
+import { UpdateuserComponent } from './updateuser/updateuser.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
@@ -15,9 +16,11 @@ import { LoginComponent } from './login/login.component';
 import { UserService } from './providers/user.service';
 import { AuthService } from './providers/auth.service';
 
+
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'users', component: UserComponent}
+  {path: 'users', component: UserComponent},
+  {path: 'updateuser', component: UpdateuserComponent}
 ];
 
 @NgModule({
@@ -26,7 +29,8 @@ const appRoutes: Routes = [
     UserComponent,
     FooterComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    UpdateuserComponent
   ],
   imports: [
     HttpClientModule,
